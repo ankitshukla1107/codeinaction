@@ -353,9 +353,9 @@ public class BinaryTree {
 		// System.out.println(tree.heightOrDepthOfBinaryTree(tree.root));
 		// tree.printLevelOrderLineByLine(tree);
 		// tree.printPaths(tree.root);
-		// tree.levelOrderTraversal(tree.mirrorOfBinaryTree(tree.root));
+		 tree.levelOrderTraversal(tree.mirrorOfBinaryTree(tree.root));
 		// tree.printAncestors(tree.root, 7);
 		// tree.printSingles(tree.root);
-		tree.printSpiral(tree.root);
+		// tree.printSpiral(tree.root);
 	}
 }
