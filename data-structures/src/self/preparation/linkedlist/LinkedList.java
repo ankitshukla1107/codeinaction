@@ -14,64 +14,6 @@ public class LinkedList {
 		}
 	}
 
-	// Basic operations on List
-	public static void main(String[] args) {
-		// Populating the Linked List
-		LinkedList linkedList = new LinkedList();
-		linkedList.head = new Node(12);
-		linkedList.head.next = new Node(14);
-		linkedList.head.next.next = new Node(16);
-		linkedList.head.next.next.next = new Node(18);
-
-		System.out.println("Going to traverse Linked List: ");
-		traverseLinkedList(linkedList.head);
-
-		System.out.println("Inserting Node at beginning...");
-		Node nodeToInsert = new Node(10);
-		int beginning = 1;
-		Node newheadAfterInsertionAtBeginning = insertInLinkedList(
-				linkedList.head, nodeToInsert, beginning);
-		System.out
-				.println("Going to traverse Linked List after insertion at beginning: ");
-		traverseLinkedList(newheadAfterInsertionAtBeginning);
-
-		System.out.println("Inserting Node at middle...");
-		Node nodeToInsertAtMiddle = new Node(15);
-		int middle = 3;
-		Node newHeadAferInsertionAtMiddle = insertInLinkedList(linkedList.head,
-				nodeToInsertAtMiddle, middle);
-		System.out
-				.println("Going to traverse Linked List after insertion at middle: ");
-		traverseLinkedList(newHeadAferInsertionAtMiddle);
-
-		System.out.println("Inserting Node at End...");
-		Node nodeToInsertAtEnd = new Node(20);
-		int end = 4;
-		Node newHeadAferInsertionAtEnd = insertInLinkedList(linkedList.head,
-				nodeToInsertAtEnd, end);
-		System.out
-				.println("Going to traverse Linked List after insertion at end: ");
-		traverseLinkedList(newHeadAferInsertionAtEnd);
-
-		System.out.println("Deleting Node at beginning...");
-		Node nodeAfterDeleteAtBeg = deleteFromLinkedList(linkedList.head, 1);
-		System.out
-				.println("Going to traverse linked list after deletion at beginning...");
-		traverseLinkedList(nodeAfterDeleteAtBeg);
-
-		System.out.println("Deleting Node at middle...");
-		Node nodeAfterDeleteAtMiddle = deleteFromLinkedList(linkedList.head, 3);
-		System.out
-				.println("Going to traverse linked list after deletion at middle...");
-		traverseLinkedList(nodeAfterDeleteAtMiddle);
-
-		System.out.println("Deleting Node at end...");
-		Node nodeAfterDeleteAtEnd = deleteFromLinkedList(linkedList.head, 4);
-		System.out
-				.println("Going to traverse linked list after deletion at middle...");
-		traverseLinkedList(nodeAfterDeleteAtEnd);
-	}
-
 	private static void traverseLinkedList(Node head) {
 		Node current = head;
 		while (current != null) {
@@ -135,5 +77,78 @@ public class LinkedList {
 			current = null;
 		}
 		return head;
+	}
+	
+	private static Node reverseLinkedList(Node head){
+		Node temp = null;
+		Node nextNode = null;
+		while(head!=null){
+			nextNode = head.next;
+			head.next = temp;
+			temp = head;
+			head = nextNode; 
+		}
+		return head;
+	}
+	
+	// Basic operations on List
+	public static void main(String[] args) {
+		// Populating the Linked List
+		LinkedList linkedList = new LinkedList();
+		linkedList.head = new Node(12);
+		linkedList.head.next = new Node(14);
+		linkedList.head.next.next = new Node(16);
+		linkedList.head.next.next.next = new Node(18);
+
+		/*System.out.println("Going to traverse Linked List: ");
+		traverseLinkedList(linkedList.head);
+
+		System.out.println("Inserting Node at beginning...");
+		Node nodeToInsert = new Node(10);
+		int beginning = 1;
+		Node newheadAfterInsertionAtBeginning = insertInLinkedList(
+				linkedList.head, nodeToInsert, beginning);
+		System.out
+				.println("Going to traverse Linked List after insertion at beginning: ");
+		traverseLinkedList(newheadAfterInsertionAtBeginning);
+
+		System.out.println("Inserting Node at middle...");
+		Node nodeToInsertAtMiddle = new Node(15);
+		int middle = 3;
+		Node newHeadAferInsertionAtMiddle = insertInLinkedList(linkedList.head,
+				nodeToInsertAtMiddle, middle);
+		System.out
+				.println("Going to traverse Linked List after insertion at middle: ");
+		traverseLinkedList(newHeadAferInsertionAtMiddle);
+
+		System.out.println("Inserting Node at End...");
+		Node nodeToInsertAtEnd = new Node(20);
+		int end = 4;
+		Node newHeadAferInsertionAtEnd = insertInLinkedList(linkedList.head,
+				nodeToInsertAtEnd, end);
+		System.out
+				.println("Going to traverse Linked List after insertion at end: ");
+		traverseLinkedList(newHeadAferInsertionAtEnd);
+
+		System.out.println("Deleting Node at beginning...");
+		Node nodeAfterDeleteAtBeg = deleteFromLinkedList(linkedList.head, 1);
+		System.out
+				.println("Going to traverse linked list after deletion at beginning...");
+		traverseLinkedList(nodeAfterDeleteAtBeg);
+
+		System.out.println("Deleting Node at middle...");
+		Node nodeAfterDeleteAtMiddle = deleteFromLinkedList(linkedList.head, 3);
+		System.out
+				.println("Going to traverse linked list after deletion at middle...");
+		traverseLinkedList(nodeAfterDeleteAtMiddle);
+
+		System.out.println("Deleting Node at end...");
+		Node nodeAfterDeleteAtEnd = deleteFromLinkedList(linkedList.head, 4);
+		System.out
+				.println("Going to traverse linked list after deletion at middle...");
+		traverseLinkedList(nodeAfterDeleteAtEnd);*/
+		
+		Node newHead = reverseLinkedList(linkedList.head);
+		traverseLinkedList(newHead);
 	}
 }

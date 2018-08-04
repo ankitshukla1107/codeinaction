@@ -91,9 +91,9 @@ class GraphTraversal {
 
 		g.bfs(2);
 
-		System.out.println("Following is Depth First Traversal "
+		/*System.out.println("Following is Depth First Traversal "
 				+ "(starting from vertex 2)");
 
-		g.dfs(2);
+		g.dfs(2);*/
 	}
 }
