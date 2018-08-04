@@ -71,6 +71,54 @@ public class BinarySearchTree {
 		}
 		return root;
 	}
+	
+	 // To keep tract of previous node in Inorder Traversal
+    BinarySearchTreeNode prev;
+ 
+    private boolean isBST()  {
+        prev = null;
+        return isBST(root);
+    }
+ 
+    /* Returns true if given search tree is binary
+       search tree (efficient version) */
+    boolean isBST(BinarySearchTreeNode node)
+    {
+        // traverse the tree in inorder fashion and
+        // keep a track of previous node
+        if (node != null)
+        {
+            if (!isBST(node.left))
+                return false;
+ 
+            // allows only distinct values node
+            if (prev != null && node.data <= prev.data )
+                return false;
+            prev = node;
+            return isBST(node.right);
+        }
+        return true;
+    }
+    
+	/*
+	 * Function to find LCA of n1 and n2. The function assumes that both n1 and
+	 * n2 are present in BST
+	 */
+	private BinarySearchTreeNode lca(BinarySearchTreeNode node, int n1, int n2) {
+		if (node == null)
+			return null;
+
+		// If both n1 and n2 are smaller than root, then LCA lies in left
+		if (node.data > n1 && node.data > n2)
+			return lca(node.left, n1, n2);
+
+		// If both n1 and n2 are greater than root, then LCA lies in right
+		if (node.data < n1 && node.data < n2)
+			return lca(node.right, n1, n2);
+
+		return node;
+	}
+
 
 	public static void main(String[] args) {
 		BinarySearchTree bst = new BinarySearchTree();
@@ -85,8 +133,10 @@ public class BinarySearchTree {
 		//bst.inOrderTraversal(bst.root);
 		//System.out.println(bst.search(bst.root, 9).data);
 		//System.out.println(bst.findMinimum(bst.root));
-		BinarySearchTreeNode newRoot = bst.insert(bst.root, 5);
-		bst.inOrderTraversal(newRoot);
+		//BinarySearchTreeNode newRoot = bst.insert(bst.root, 5);
+		//bst.inOrderTraversal(newRoot);
+		// System.out.println(bst.isBST());
+		System.out.println(bst.lca(bst.root, 11, 13).data);
 	}
 
 }

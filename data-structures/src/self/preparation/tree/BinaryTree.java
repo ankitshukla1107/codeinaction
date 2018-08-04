@@ -1,8 +1,13 @@
 package self.preparation.tree;
 
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
 
 public class BinaryTree {
 
@@ -11,6 +16,7 @@ public class BinaryTree {
 		private int data;
 		private BinaryTreeNode left;
 		private BinaryTreeNode right;
+		int hd;
 
 		public BinaryTreeNode(int data) {
 			this.data = data;
@@ -330,6 +336,205 @@ public class BinaryTree {
 		}
 	}
 
+	static int max_level = 0;
+
+	// recursive function to print left view
+	/*
+	 * The problem can also be solved using simple recursive traversal. We can
+	 * keep track of level of a node by passing a parameter to all recursive
+	 * calls. The idea is to keep track of maximum level also. Whenever we see a
+	 * node whose level is more than maximum level so far, we print the node
+	 * because this is the first node in its level (Note that we traverse the
+	 * left subtree before right subtree). Following is the implementation-
+	 */
+	private void leftViewUtil(BinaryTreeNode node, int level) {
+		// Base Case
+		if (node == null)
+			return;
+
+		// If this is the first node of its level
+		if (max_level < level) {
+			System.out.print(" " + node.data);
+			max_level = level;
+		}
+
+		// Recur for left and right subtrees
+		leftViewUtil(node.left, level + 1);
+		leftViewUtil(node.right, level + 1);
+	}
+
+	// A wrapper over leftViewUtil()
+	void leftView() {
+		leftViewUtil(root, 1);
+	}
+
+	/*
+	 * Bottom View of a Binary Tree Given a Binary Tree, we need to print the
+	 * bottom view from left to right. A node x is there in output if x is the
+	 * bottommost node at its horizontal distance. Horizontal distance of left
+	 * child of a node x is equal to horizontal distance of x minus 1, and that
+	 * of right child is horizontal distance of x plus 1.
+	 */
+
+	// Method that prints the bottom view.
+	public void bottomView() {
+		if (root == null)
+			return;
+
+		// Initialize a variable 'hd' with 0 for the root element.
+		int hd = 0;
+
+		// TreeMap which stores key value pair sorted on key value
+		Map<Integer, Integer> map = new TreeMap<>();
+
+		// Queue to store tree nodes in level order traversal
+		Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+
+		// Assign initialized horizontal distance value to root
+		// node and add it to the queue.
+		root.hd = hd;
+		queue.add(root);
+
+		// Loop until the queue is empty (standard level order loop)
+		while (!queue.isEmpty()) {
+			BinaryTreeNode temp = queue.remove();
+
+			// Extract the horizontal distance value from the
+			// dequeued tree node.
+			hd = temp.hd;
+
+			// Put the dequeued tree node to TreeMap having key
+			// as horizontal distance. Every time we find a node
+			// having same horizontal distance we need to replace
+			// the data in the map.
+			map.put(hd, temp.data);
+
+			// If the dequeued node has a left child add it to the
+			// queue with a horizontal distance hd-1.
+			if (temp.left != null) {
+				temp.left.hd = hd - 1;
+				queue.add(temp.left);
+			}
+			// If the dequeued node has a left child add it to the
+			// queue with a horizontal distance hd+1.
+			if (temp.right != null) {
+				temp.right.hd = hd + 1;
+				queue.add(temp.right);
+			}
+		}
+
+		// Extract the entries of map into a set to traverse
+		// an iterator over that.
+		Set<Entry<Integer, Integer>> set = map.entrySet();
+
+		// Make an iterator
+		Iterator<Entry<Integer, Integer>> iterator = set.iterator();
+
+		// Traverse the map elements using the iterator.
+		while (iterator.hasNext()) {
+			Map.Entry<Integer, Integer> me = iterator.next();
+			System.out.print(me.getValue() + " ");
+		}
+	}
+
+	class Values {
+		int max, min;
+	}
+
+	Values val = new Values();
+
+	// A utility function to find min and max distances with respect
+	// to root.
+	void findMinMax(BinaryTreeNode node, Values min, Values max, int hd) {
+		// Base case
+		if (node == null)
+			return;
+
+		// Update min and max
+		if (hd < min.min)
+			min.min = hd;
+		else if (hd > max.max)
+			max.max = hd;
+
+		// Recur for left and right subtrees
+		findMinMax(node.left, min, max, hd - 1);
+		findMinMax(node.right, min, max, hd + 1);
+	}
+
+	// A utility function to print all nodes on a given line_no.
+	// hd is horizontal distance of current node with respect to root.
+	void printVerticalLine(BinaryTreeNode node, int line_no, int hd) {
+		// Base case
+		if (node == null)
+			return;
+
+		// If this node is on the given line number
+		if (hd == line_no)
+			System.out.print(node.data + " ");
+
+		// Recur for left and right subtrees
+		printVerticalLine(node.left, line_no, hd - 1);
+		printVerticalLine(node.right, line_no, hd + 1);
+	}
+
+	// The main function that prints a given binary tree in
+	// vertical order
+	void verticalOrder(BinaryTreeNode node) {
+		// Find min and max distances with resepect to root
+		findMinMax(node, val, val, 0);
+
+		// Iterate through all possible vertical lines starting
+		// from the leftmost line and print nodes line by line
+		for (int line_no = val.min; line_no <= val.max; line_no++) {
+			printVerticalLine(node, line_no, 0);
+			System.out.println("");
+		}
+	}
+	
+	// head --> Pointer to head node of created doubly linked list
+    BinaryTreeNode head;
+      
+    // Initialize previously visited node as NULL. This is
+    // static so that the same value is accessible in all recursive
+    // calls
+    static BinaryTreeNode prev = null;
+  
+    // A simple recursive function to convert a given Binary tree 
+    // to Doubly Linked List
+    // root --> Root of Binary Tree
+    private void binaryTree2DoubleLinkedList(BinaryTreeNode root) 
+    {
+        // Base case
+        if (root == null)
+            return;
+  
+        // Recursively convert left subtree
+        binaryTree2DoubleLinkedList(root.left);
+  
+        // Now convert this node
+        if (prev == null) 
+            head = root;
+        else
+        {
+            root.left = prev;
+            prev.right = root;
+        }
+        prev = root;
+  
+        // Finally convert right subtree
+        binaryTree2DoubleLinkedList(root.right);
+    }
+  
+    /* Function to print nodes in a given doubly linked list */
+    void printList(BinaryTreeNode node)
+    {
+        while (node != null) 
+        {
+            System.out.print(node.data + " ");
+            node = node.right;
+        }
+    }
+
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
 		tree.root = new BinaryTreeNode(1);
@@ -353,9 +558,14 @@ public class BinaryTree {
 		// System.out.println(tree.heightOrDepthOfBinaryTree(tree.root));
 		// tree.printLevelOrderLineByLine(tree);
 		// tree.printPaths(tree.root);
-		 tree.levelOrderTraversal(tree.mirrorOfBinaryTree(tree.root));
+		// tree.levelOrderTraversal(tree.mirrorOfBinaryTree(tree.root));
 		// tree.printAncestors(tree.root, 7);
 		// tree.printSingles(tree.root);
 		// tree.printSpiral(tree.root);
+		// tree.leftView();
+		// tree.bottomView();
+		// tree.verticalOrder(tree.root);
+		tree.binaryTree2DoubleLinkedList(tree.root);
+		tree.printList(tree.head);
 	}
 }

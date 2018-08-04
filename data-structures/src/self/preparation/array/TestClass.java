@@ -1,12 +1,26 @@
 package self.preparation.array;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.Stack;
 
 public class TestClass {
 
 	    
 		public static void main(String[] args) {
-			
+			Map<Integer, Integer> map = new HashMap<>();
+			map.put(1, null);
+			map.put(null, null);
+			map.put(null, 3);
+			for(Map.Entry<Integer, Integer> entry: map.entrySet()){
+				System.out.println(entry.getKey()+""+entry.getValue());
+			}
 			Scanner sc = new Scanner(System.in);
 			int testCases = sc.nextInt();
 			int arr[];

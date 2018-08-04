@@ -1,9 +1,11 @@
 package self.preparation.java.collections;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,43 +13,68 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 public class SortByFrequency {
+	
+	class Data{	
+		int value, count;
+		Integer index;
+		public Data(int value, int count, int frequency) {
+			this.value = value;
+			this.count = count;
+			this.index = frequency;
+		}	
+		@Override
+		public String toString() {
+			return "Data [value=" + value + ", count=" + count + ", index="
+					+ index + "]";
+		}
+	}
 
-	public static void main(String[] args) {
-		int arr[] = { 2, 5, 2, 8, 5, 6, 8, 8 };
-		List<Integer> result = new ArrayList<Integer>();
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		for (int current : arr) {
-			if (map.containsKey(current)) {
-				map.put(current, map.get(current) + 1);
-			} else {
-				map.put(current, 1);
+	public void customSort(int[] arr){
+		if(arr==null || arr.length<2){
+			return;
+		}
+		Map<Integer, Data> map = new HashMap<Integer, Data>();
+		Data data = null;
+		for(int i=0; i<arr.length;i++){
+			data = map.get(arr[i]);
+			if(data==null){
+				map.put(arr[i], new Data(arr[i],1,i));
+			}else{
+				data.count++;
 			}
 		}
-		Map<Integer, Integer> treeMap = new TreeMap<Integer, Integer>(map);
-
-		Set<Entry<Integer, Integer>> set = treeMap.entrySet();
-		List<Entry<Integer, Integer>> list = new ArrayList<Entry<Integer, Integer>>(
-				set);
-		Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
+		
+		// sort based on custom comparator
+		//Data[] values = (Data[])map.values().toArray();
+		Set<Map.Entry<Integer, Data>> entrySet = map.entrySet();
+		List<Map.Entry<Integer, Data>> list = new ArrayList<Map.Entry<Integer, Data>>(entrySet);
+		Collections.sort(list, new Comparator<Map.Entry<Integer, Data>>() {
 			@Override
-			public int compare(Entry<Integer, Integer> o1,
-					Entry<Integer, Integer> o2) {
-				if (o1.getValue() == o2.getValue()) {
-					return 0;
-				} else if (o1.getValue() < o2.getValue()) {
-					return +1;
-				} else {
+			public int compare(Entry<Integer, Data> o1, Entry<Integer, Data> o2) {
+				if (o1.getValue().count > o2.getValue().count) {
 					return -1;
+				} else if (o1.getValue().count < o2.getValue().count) {
+					return 1;
+				} else {
+					return o1.getValue().index.compareTo(o2.getValue().index);
 				}
 			}
 		});
-		for (Map.Entry<Integer, Integer> entry : list) {
-			for (int i = 0; i < entry.getValue(); i++) {
-				result.add(entry.getKey());
+		
+		int k = 0;
+		for (Entry<Integer, Data> entry : list) {
+			data = entry.getValue();
+			for(int j=0;j<data.count;j++){
+				arr[k++] = data.value;
 			}
 		}
-		System.out.println(result);
-
 	}
-
+	
+	public static void main(String[] args) {
+		int arr[] = { 5, 2, 2, 8, 5, 6, 8, 8 };
+		new SortByFrequency().customSort(arr);
+		for (int i : arr) {
+			System.out.println(i+" ");
+		}
+	}
 }
