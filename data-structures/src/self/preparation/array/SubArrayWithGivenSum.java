@@ -3,10 +3,10 @@ package self.preparation.array;
 public class SubArrayWithGivenSum {
 
 	public static void main(String[] args) {
-		int arr[] = {15, 2, 4, 8, 9, 5, 10, 23};
+		int arr[] = {1, 2, 3, 7, 5};
 		SubArrayWithGivenSum subArrayWithGivenSum = new SubArrayWithGivenSum();
 		//subArrayWithGivenSum.getSubArrayWithGivenSum(arr, 23);
-		subArrayWithGivenSum.getSubArrayWithGivenSumOptimized(arr, 23);
+		subArrayWithGivenSum.getSubArrayWithGivenSumOptimized(arr, 12);
 	}
 	
 	// O(n*n) solution- Naive Approach

@@ -110,7 +110,7 @@ public class LinkedList {
 				linkedList.head, nodeToInsert, beginning);
 		System.out
 				.println("Going to traverse Linked List after insertion at beginning: ");
-		traverseLinkedList(newheadAfterInsertionAtBeginning);
+		traverseLinkedList(newheadAfterInsertionAtBeginning);*/
 
 		System.out.println("Inserting Node at middle...");
 		Node nodeToInsertAtMiddle = new Node(15);
@@ -121,7 +121,7 @@ public class LinkedList {
 				.println("Going to traverse Linked List after insertion at middle: ");
 		traverseLinkedList(newHeadAferInsertionAtMiddle);
 
-		System.out.println("Inserting Node at End...");
+		/*System.out.println("Inserting Node at End...");
 		Node nodeToInsertAtEnd = new Node(20);
 		int end = 4;
 		Node newHeadAferInsertionAtEnd = insertInLinkedList(linkedList.head,
@@ -146,9 +146,9 @@ public class LinkedList {
 		Node nodeAfterDeleteAtEnd = deleteFromLinkedList(linkedList.head, 4);
 		System.out
 				.println("Going to traverse linked list after deletion at middle...");
-		traverseLinkedList(nodeAfterDeleteAtEnd);*/
+		traverseLinkedList(nodeAfterDeleteAtEnd);
 		
 		Node newHead = reverseLinkedList(linkedList.head);
-		traverseLinkedList(newHead);
+		traverseLinkedList(newHead);*/
 	}
 }

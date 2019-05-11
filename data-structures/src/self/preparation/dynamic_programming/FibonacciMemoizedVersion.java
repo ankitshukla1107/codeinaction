@@ -1,34 +1,29 @@
 package self.preparation.dynamic_programming;
 
-public class FibonacciMemoizedVersion {
+class FibonacciMemoizedVersion {
 
-	static int MAX = 100;
-	static int[] lookup = new int[20];
+	public int CalculateFibonacci(int n) {
+		int memoize[] = new int[n + 1];
+		return CalculateFibonacciRecursive(memoize, n);
+	}
+
+	public int CalculateFibonacciRecursive(int[] memoize, int n) {
+		if (n < 2)
+			return n;
+
+		// if we have already solved this subproblem, simply return the result from the cache
+		if (memoize[n] != 0)
+			return memoize[n];
+
+		memoize[n] = CalculateFibonacciRecursive(memoize, n - 1)
+				+ CalculateFibonacciRecursive(memoize, n - 2);
+		return memoize[n];
+	}
+
 	public static void main(String[] args) {
-		
-		
-		
-		
-		
-		/*initialize(lookup);
-		System.out.println(fib(6));*/
+		FibonacciMemoizedVersion fib = new FibonacciMemoizedVersion();
+		System.out.println("5th Fibonacci is ---> " + fib.CalculateFibonacci(5));
+		System.out.println("6th Fibonacci is ---> " + fib.CalculateFibonacci(6));
+		System.out.println("7th Fibonacci is ---> " + fib.CalculateFibonacci(7));
 	}
-	
-	private static void initialize(int[] lookup){
-		for (int i = 0; i < 20; i++) {
-			lookup[i] = 0;
-		}
-	}
-	
-	private static int fib(int n){
-		if(lookup[n]==0){
-			if(n<=1){
-				lookup[n] = n;
-			}else{
-				lookup[n] = fib(n-1)+fib(n-2);
-			}
-		}
-		return lookup[n];
-	}
-
 }
