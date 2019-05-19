@@ -534,46 +534,6 @@ public class BinaryTree {
             node = node.right;
         }
     }
-    
-    void printNodesBetweenLevels(BinaryTreeNode root, int low, int high){
-    	if(root==null)
-    		return;
-    	Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
-    	BinaryTreeNode marker = new BinaryTreeNode(100);
-    	int level = 1;
-    	queue.add(root);
-    	queue.add(marker);
-    	while(!queue.isEmpty()){
-    		BinaryTreeNode temp = (BinaryTreeNode)queue.poll();
-    		//check if end of level is reached
-    		if(temp.data==marker.data){
-    			System.out.println("");
-    			level++;
-    			// Check if marker node was last node in queue or 
-                // level number is beyond the given upper limit 
-                if (queue.isEmpty() == true || level > high) 
-                    break; 
-   
-                // Enqueue the marker for end of next level 
-                queue.add(marker); 
-                   
-                // If this is marker, then we don't need print it 
-                // and enqueue its children 
-                continue; 
-    		}
-    		// If level is equal to or greater than given lower level, 
-            // print it 
-            if (level >= low) 
-                System.out.print( temp.data + " "); 
-  
-            // Enqueue children of non-marker node 
-            if (temp.left != null) 
-                queue.add(temp.left); 
-              
-            if (temp.right != null)  
-                queue.add(temp.right); 
-    	}
-    }
 
 	public static void main(String[] args) {
 		BinaryTree tree = new BinaryTree();
@@ -605,8 +565,7 @@ public class BinaryTree {
 		// tree.leftView();
 		// tree.bottomView();
 		// tree.verticalOrder(tree.root);
-		// btree.binaryTree2DoubleLinkedList(tree.root);
-		tree.printNodesBetweenLevels(tree.root, 2, 3);
-		// tree.printList(tree.head);
+		tree.binaryTree2DoubleLinkedList(tree.root);
+		tree.printList(tree.head);
 	}
 }

@@ -28,7 +28,6 @@ public class ArrayQueue {
 	public void enqueue(int item){
 		if(isFull()){
 			System.out.println("Queue is full");
-			return;
 		}
 		rear = (rear+1)%capacity;
 		arr[rear] = item;
@@ -40,7 +39,6 @@ public class ArrayQueue {
 	public int dequeue(){
 		if(isEmpty()){
 			System.out.println("Queue is empty");
-			return 0;
 		}
 		int item = arr[front];
 		if(front==rear){
