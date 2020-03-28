@@ -56,7 +56,7 @@ public class BinaryTree {
 	}
 
 	private void levelOrderTraversal(BinaryTreeNode root) {
-		Queue queue = new LinkedList();
+		Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
 		if (root == null) {
 			return;
 		}
