@@ -10,10 +10,11 @@ public class PairInArray {
 	// Given an array A[] and a number x, check for pair in A[] with sum as x
 
 	public static void main(String[] args) {
-		int arr[] = { 2, 4, 5, 8, 1, 3 };
+		//int arr[] = { 2, 4, 5, 8, 1, 3 };
+		int arr[] = {4,3,1,2,5};
 		// printPairsInArray(arr,6);
-		// printpairs(arr, 6);
-		printPairsUsingSorting(arr, 6);
+		 printpairs(arr, 5);
+		// printPairsUsingSorting(arr, 6);
 	}
 
 	private static void printPairsInArray(int[] arr, int x) {

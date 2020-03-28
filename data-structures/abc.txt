@@ -1,0 +1,15 @@
+Hello
+test
+bye
+
+(hello,1)
+(test,2)
+(bye,3)
+
+===> pivot=test--2
+list1 = hello
+list2 = bye
+
+list1+pivot+list2
+
+O(n), O(n)
