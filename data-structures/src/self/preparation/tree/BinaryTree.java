@@ -93,8 +93,8 @@ public class BinaryTree {
 	}
 
 	private void levelOrderTraversalInReverse(BinaryTreeNode root) {
-		Queue queue = new LinkedList();
-		LinkedList stack = new LinkedList();
+		Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+		LinkedList<Integer> stack = new LinkedList<Integer>();
 		if (root == null) {
 			return;
 		}
