@@ -5,8 +5,8 @@ public class LargestSubArraySum {
 	public static void main(String[] args) {
 		int[] arr = { -2, -3, 4, -1, -2, 1, 5, -3 };
 		LargestSubArraySum largestSubArraySum = new LargestSubArraySum();
-		largestSubArraySum.getLargestSubArraySumBasic(arr);
-		largestSubArraySum.getLargestSubArraySumOptimized(arr);
+	//	largestSubArraySum.getLargestSubArraySumBasic(arr);
+	//	largestSubArraySum.getLargestSubArraySumOptimized(arr);
 		largestSubArraySum.getIndexOfLargestSubArraySum(arr);
 	}
 

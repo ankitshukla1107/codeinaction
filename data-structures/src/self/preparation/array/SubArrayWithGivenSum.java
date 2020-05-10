@@ -3,10 +3,10 @@ package self.preparation.array;
 public class SubArrayWithGivenSum {
 
 	public static void main(String[] args) {
-		int arr[] = {15, 2, 4, 8, 9, 5, 10, 23};
+		int arr[] = {2,3,4,2,5,5};//{15, 2, 4, 8, 9, 5, 10, 23};
 		SubArrayWithGivenSum subArrayWithGivenSum = new SubArrayWithGivenSum();
-		//subArrayWithGivenSum.getSubArrayWithGivenSum(arr, 23);
-		subArrayWithGivenSum.getSubArrayWithGivenSumOptimized(arr, 23);
+		subArrayWithGivenSum.getSubArrayWithGivenSum(arr, 10);
+		//subArrayWithGivenSum.getSubArrayWithGivenSumOptimized(arr, 23);
 	}
 	
 	// O(n*n) solution- Naive Approach
@@ -14,7 +14,7 @@ public class SubArrayWithGivenSum {
 		int curr_sum;
 		for (int i = 0; i < arr.length; i++) {
 			curr_sum = arr[i];
-			for (int j = i+1; j < arr.length; j++) {
+			for (int j = i+1; j <= arr.length; j++) {
 				if(curr_sum==sum){
 					int p = j-1;
 					System.out.println("sum found between: "+i+","+p);
