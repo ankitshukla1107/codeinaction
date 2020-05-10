@@ -79,6 +79,26 @@ public class LinkedList {
 		return head;
 	}
 	
+	private static Node getMiddleElement(Node head) {
+		Node slow = head, fast = head;
+		int i = 0;
+		if(head!=null) {
+			while(fast.next!=null) {
+				if(i==0) {
+					fast = fast.next;
+					i=1;
+				}else if(i==1) {
+					slow = slow.next;
+					fast = fast.next;
+					i = 0;
+				}
+				
+				
+			}
+		}
+		return slow;
+	}
+	
 	private static Node reverseLinkedList(Node head){
 		Node temp = null;
 		Node nextNode = null;
@@ -90,6 +110,34 @@ public class LinkedList {
 		}
 		return head;
 	}
+	
+	private static void rotateLinkedListByK(Node head, int k) {
+		int counter = 1;
+		Node current = head;
+		while(counter<k && current!=null) {
+			current = current.next;
+			counter++;
+		}
+		
+		// if k is greater than linked list length, then return null
+		if(current==null)
+			return;
+		
+		Node kthNode = current;
+		while(current.next!=null) {
+			current = current.next;
+		}
+		
+		// now change pointers, first point last node to head
+		current.next = head;
+		// change head to kth next node
+		head = kthNode.next;
+		// point kth Node next to null
+		kthNode.next = null;
+		
+		System.out.println("linked list after rotation after "+k+ "th Node");
+		traverseLinkedList(head);
+	}	
 	
 	// Basic operations on List
 	public static void main(String[] args) {
@@ -148,7 +196,13 @@ public class LinkedList {
 				.println("Going to traverse linked list after deletion at middle...");
 		traverseLinkedList(nodeAfterDeleteAtEnd);*/
 		
-		Node newHead = reverseLinkedList(linkedList.head);
-		traverseLinkedList(newHead);
+	//	Node newHead = reverseLinkedList(linkedList.head);
+		
+		traverseLinkedList(linkedList.head);
+		
+//		Node middleNode = getMiddleElement(linkedList.head);
+//		System.out.println(middleNode.data);
+		
+		rotateLinkedListByK(linkedList.head, 2);
 	}
 }
